@@ -67,7 +67,9 @@ public class readWriteTxt
 	  	int current = data[0];
 		boolean found = false;
 		
-		int track = 0;
+		int newAmmount = ammount;
+		
+		int tr = 0;
 		
 		//gets new length of array without duplicates
 		for(int j = 0; j < ammount; j++) 
@@ -75,7 +77,7 @@ public class readWriteTxt
 			if(current == data[j] && !found)
 			{
 		        found = true;
-		        ammount--;
+		        newAmmount--;
 		    }
 		    else if(current != data[j])
 		    {
@@ -83,37 +85,38 @@ public class readWriteTxt
 		        found = false;
 		    }
 		}
+		newAmmount++;
 			
-		int dataOut[] = new int[ammount];
+		int dataOut[] = new int[newAmmount];
 		
 		int current2 = data[0];
-	
 		boolean found2 = false;
-		
-		for(int j = 0; j < ammount; j++) 
+		dataOut[0] = data[0];
+		for(int j = 0; j < newAmmount; j++) 
 		{
-			if(current2 == data[j+track] && !found2)
+			if(current2 == data[j] && !found2)
 			{
 		        found2 = true;
-		        track++;
+		        tr++;
+		        dataOut[j] = data[j+tr];
 		    }
-		    else if(current2 != data[j+track])
+		    else if(current2 != data[j])
 		    {
-		    	dataOut[j] = data[j+track];
-		        current2 = data[j+track];
+		    	dataOut[j] = data[j+tr];
+		        current2 = data[j];
 		        found2 = false;
 		    }
 		}
+		
 		String out;
 		//write non-duplicate array into new txt file
 		try
 		{
 			PrintWriter writer = new PrintWriter("H:/Java/readWriteTxt/write.txt");
 			
-			for(int h = 0; h < ammount; h++)
+			for(int h = 0; h < newAmmount; h++)
 			{
-				out = String.valueOf(dataOut[h]);
-				writer.println(out);
+				writer.println(dataOut[h]);
 				System.out.println("ONE");
 			}		
 			
