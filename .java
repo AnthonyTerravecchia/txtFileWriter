@@ -103,7 +103,7 @@ public class readWriteTxt
 		        found2 = true;
 		        track++;
 		    }
-		    else if(current2 != data[j])
+		    else if(current2 != data[j+track])
 		    {
 		    	dataOut[j] = data[j+track];
 		        current2 = data[j+track];
