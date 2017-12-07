@@ -15,7 +15,7 @@ import java.io.*;
 
 public class readWriteTxt
 {
-	public static void main(String[] args)
+	public static void main(String[] args)throws IOException
 	{
 		int ammount = 0;
 		int value = 0;
@@ -34,42 +34,37 @@ public class readWriteTxt
 				ammount++;
 			}
 			in.close();	
-			
-		
 		}
-		catch(IOException e)
-    	{
-        	System.exit(0);
-    	}
-    	
-    	int data[] = new int[ammount];
-    	
-    	//saves values from txt to array
-    	try
+		catch(FileNotFoundException e)
+	  	{
+			System.out.println("FILE NOT FOUND");
+	  	}
+  	
+	  	int data[] = new int[ammount];
+	  	
+	  	//saves values from txt to array
+	  	try
 		{
-			BufferedReader in = new BufferedReader(new FileReader("H://Java//readWriteTxt//read.txt"));
-			
+			BufferedReader in = new BufferedReader(new FileReader("H:/Java/readWriteTxt/read.txt"));
+				
 			String line;
 			while((line = in.readLine()) != null)
 			{
 				value = Integer.parseInt(line);
 				i++;
 				data[i] = value;
-				
+					
 			}
+			
 			in.close();
+			
 		}
-		catch(IOException e)
-    	{
-        	System.exit(0);
-    	}
-    	
-   
-    	
-    	
-    	int newAmmount = ammount;
-    	
-    	int current = data[0];
+	  	catch(FileNotFoundException e)
+	  	{
+			System.out.println("FILE NOT FOUND");
+	  	}
+  	
+	  	int current = data[0];
 		boolean found = false;
 		
 		int track = 0;
@@ -80,7 +75,7 @@ public class readWriteTxt
 			if(current == data[j] && !found)
 			{
 		        found = true;
-		        newAmmount--;
+		        ammount--;
 		    }
 		    else if(current != data[j])
 		    {
@@ -89,14 +84,13 @@ public class readWriteTxt
 		    }
 		}
 			
-		int dataOut[] = new int[newAmmount];
+		int dataOut[] = new int[ammount];
 		
-		//saves array
 		int current2 = data[0];
 	
 		boolean found2 = false;
 		
-		for(int j = 0; j < newAmmount; j++) 
+		for(int j = 0; j < ammount; j++) 
 		{
 			if(current2 == data[j+track] && !found2)
 			{
@@ -110,23 +104,26 @@ public class readWriteTxt
 		        found2 = false;
 		    }
 		}
-		int out;
+		String out;
 		//write non-duplicate array into new txt file
 		try
 		{
 			PrintWriter writer = new PrintWriter("H:/Java/readWriteTxt/write.txt");
 			
-			for(int h = 0; h < newAmmount; h++)
+			for(int h = 0; h < ammount; h++)
 			{
-				out = dataOut[h];
-				writer.write(out);
+				out = String.valueOf(dataOut[h]);
+				writer.println(out);
+				System.out.println("ONE");
 			}		
+			
+			writer.close();
 		}
-		catch(IOException e)
-		{
-			System.exit(0);
-		}
-    	
+		catch(FileNotFoundException e)
+	  	{
+			System.out.println("FILE NOT FOUND");
+	  	}
+  	
 	}
+		
 }
- 
