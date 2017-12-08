@@ -10,7 +10,7 @@
  *
  */
  
-//Anthony Terravecchia
+//Anthony Terravecchia 
 import java.io.*;
 
 public class readWriteTxt
@@ -26,7 +26,7 @@ public class readWriteTxt
 		//because need it for array length
 		try
 		{
-			BufferedReader in = new BufferedReader(new FileReader("C:/Users/Anthony/Documents/Eclipse/files/src/files/read.txt"));
+			BufferedReader in = new BufferedReader(new FileReader("H:/Java/readWriteTxt/read.txt"));
 			
 			String line;
 			while((line = in.readLine()) != null)
@@ -45,7 +45,7 @@ public class readWriteTxt
 	  	//saves values from txt to array
 	  	try
 		{
-			BufferedReader in = new BufferedReader(new FileReader("C:/Users/Anthony/Documents/Eclipse/files/src/files/read.txt"));
+			BufferedReader in = new BufferedReader(new FileReader("H:/Java/readWriteTxt/read.txt"));
 				
 			String line;
 			while((line = in.readLine()) != null)
@@ -66,8 +66,8 @@ public class readWriteTxt
   	
 	  	int current = data[0];
 		boolean found = false;
-		
-		int newAmmount = ammount;
+		System.out.println(ammount);
+		int newAmmount = 0;
 		
 		int tr = 0;
 		
@@ -77,44 +77,46 @@ public class readWriteTxt
 			if(current == data[j] && !found)
 			{
 		        found = true;
-		        newAmmount--;
 		    }
 		    else if(current != data[j])
 		    {
 		        current = data[j];
 		        found = false;
+		        newAmmount++;
 		    }
 		}
 		newAmmount++;
+		System.out.println(newAmmount);
 		
 		int dataOut[] = new int[newAmmount];
 		
-		int current2 = data[1];
+		int current2 = data[0];
 		boolean found2 = false;
-		dataOut[0] = data[0];
-		for(int j = 1; j < newAmmount; j++) 
+		for(int j = 0; j < newAmmount; j++) 
 		{
 			if(current2 == data[j] && !found2)
 			{
 		        found2 = true;
-		        tr++;
-		        dataOut[j] = data[j+tr];
-		        
+		        dataOut[j] = data[j];
 		    }
-		    else if(current2 != data[j+tr])
+		    else if(current2 != data[j])
 		    {
-		    	
-		    	dataOut[j] = data[j+tr];
-		        current2 = data[j+tr];
+		    	dataOut[j] = data[j];
+		        current2 = data[j];
 		        found2 = false;
 		    }
+		}
+		System.out.println("***********");
+		for(int p = 0; p<newAmmount; p++)
+		{
+			System.out.println(dataOut[p]);
 		}
 		
 		String out;
 		//write non-duplicate array into new txt file
 		try
 		{
-			PrintWriter writer = new PrintWriter("C:/Users/Anthony/Documents/Eclipse/files/src/files/write.txt");
+			PrintWriter writer = new PrintWriter("H:/Java/readWriteTxt/write.txt");
 			
 			for(int h = 0; h < newAmmount; h++)
 			{
