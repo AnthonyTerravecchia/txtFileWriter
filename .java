@@ -26,7 +26,7 @@ public class readWriteTxt
 		//because need it for array length
 		try
 		{
-			BufferedReader in = new BufferedReader(new FileReader("H:/Java/readWriteTxt/read.txt"));
+			BufferedReader in = new BufferedReader(new FileReader("C:/Users/Anthony/Documents/Eclipse/files/src/files/read.txt"));
 			
 			String line;
 			while((line = in.readLine()) != null)
@@ -45,7 +45,7 @@ public class readWriteTxt
 	  	//saves values from txt to array
 	  	try
 		{
-			BufferedReader in = new BufferedReader(new FileReader("H:/Java/readWriteTxt/read.txt"));
+			BufferedReader in = new BufferedReader(new FileReader("C:/Users/Anthony/Documents/Eclipse/files/src/files/read.txt"));
 				
 			String line;
 			while((line = in.readLine()) != null)
@@ -86,24 +86,26 @@ public class readWriteTxt
 		    }
 		}
 		newAmmount++;
-			
+		
 		int dataOut[] = new int[newAmmount];
 		
-		int current2 = data[0];
+		int current2 = data[1];
 		boolean found2 = false;
 		dataOut[0] = data[0];
-		for(int j = 0; j < newAmmount; j++) 
+		for(int j = 1; j < newAmmount; j++) 
 		{
 			if(current2 == data[j] && !found2)
 			{
 		        found2 = true;
 		        tr++;
 		        dataOut[j] = data[j+tr];
+		        
 		    }
-		    else if(current2 != data[j])
+		    else if(current2 != data[j+tr])
 		    {
+		    	
 		    	dataOut[j] = data[j+tr];
-		        current2 = data[j];
+		        current2 = data[j+tr];
 		        found2 = false;
 		    }
 		}
@@ -112,7 +114,7 @@ public class readWriteTxt
 		//write non-duplicate array into new txt file
 		try
 		{
-			PrintWriter writer = new PrintWriter("H:/Java/readWriteTxt/write.txt");
+			PrintWriter writer = new PrintWriter("C:/Users/Anthony/Documents/Eclipse/files/src/files/write.txt");
 			
 			for(int h = 0; h < newAmmount; h++)
 			{
