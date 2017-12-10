@@ -9,27 +9,24 @@
  *Author: Anthony Terravecchia
  *
  */
- 
-//Anthony Terravecchia 
+ //Anthony Terravecchia
+
 import java.io.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class readWriteTxt
 {
 	public static void main(String[] args)throws IOException
 	{
 		int ammount = 0;
-		int value = 0;
-		int i = -1;
-		int max=0 , avg=0 , min=99999999;
 		
-		//get number of lines in txt 
-		//because need it for array length
+		//finds the number of lines in the .txt for the array
 		try
 		{
-			BufferedReader in = new BufferedReader(new FileReader("H:/Java/readWriteTxt/read.txt"));
+			BufferedReader in = new BufferedReader(new FileReader("C:/Users/Anthony/Documents/Eclipse/files/bin/files/read.txt"));
 			
-			String line;
-			while((line = in.readLine()) != null)
+			while((in.readLine()) != null)
 			{
 				ammount++;
 			}
@@ -39,21 +36,24 @@ public class readWriteTxt
 	  	{
 			System.out.println("FILE NOT FOUND");
 	  	}
-  	
+		
+		//initialize array
 	  	int data[] = new int[ammount];
 	  	
-	  	//saves values from txt to array
+	  	//stores values from .txt to an array
 	  	try
 		{
-			BufferedReader in = new BufferedReader(new FileReader("H:/Java/readWriteTxt/read.txt"));
-				
+			BufferedReader in = new BufferedReader(new FileReader("C:/Users/Anthony/Documents/Eclipse/files/bin/files/read.txt"));
+			
+			int value = 0;
+			int i = 0;
 			String line;
+			
 			while((line = in.readLine()) != null)
 			{
 				value = Integer.parseInt(line);
-				i++;
 				data[i] = value;
-					
+				i++;	
 			}
 			
 			in.close();
@@ -64,61 +64,23 @@ public class readWriteTxt
 			System.out.println("FILE NOT FOUND");
 	  	}
   	
-	  	int current = data[0];
-		boolean found = false;
-		System.out.println(ammount);
-		int newAmmount = 0;
+		//sets do not contain duplicate integers 
+		//this stores the integers into a set and saves it to a new array
+		Set<Integer> set = new HashSet<Integer>();
 		
-		int tr = 0;
-		
-		//gets new length of array without duplicates
-		for(int j = 0; j < ammount; j++) 
+		for(int num : data)
 		{
-			if(current == data[j] && !found)
-			{
-		        found = true;
-		    }
-		    else if(current != data[j])
-		    {
-		        current = data[j];
-		        found = false;
-		        newAmmount++;
-		    }
-		}
-		newAmmount++;
-		System.out.println(newAmmount);
-		
-		int dataOut[] = new int[newAmmount];
-		
-		int current2 = data[0];
-		boolean found2 = false;
-		for(int j = 0; j < newAmmount; j++) 
-		{
-			if(current2 == data[j] && !found2)
-			{
-		        found2 = true;
-		        dataOut[j] = data[j];
-		    }
-		    else if(current2 != data[j])
-		    {
-		    	dataOut[j] = data[j];
-		        current2 = data[j];
-		        found2 = false;
-		    }
-		}
-		System.out.println("***********");
-		for(int p = 0; p<newAmmount; p++)
-		{
-			System.out.println(dataOut[p]);
+			set.add(num);
 		}
 		
-		String out;
-		//write non-duplicate array into new txt file
+		Integer[] dataOut = set.toArray(new Integer[0]);
+		
+		//writes new array into .txt file
 		try
 		{
-			PrintWriter writer = new PrintWriter("H:/Java/readWriteTxt/write.txt");
+			PrintWriter writer = new PrintWriter("C:/Users/Anthony/Documents/Eclipse/files/bin/files/write.txt");
 			
-			for(int h = 0; h < newAmmount; h++)
+			for(int h = 0; h < dataOut.length; h++)
 			{
 				writer.println(dataOut[h]);
 				System.out.println("ONE");
@@ -129,8 +91,6 @@ public class readWriteTxt
 		catch(FileNotFoundException e)
 	  	{
 			System.out.println("FILE NOT FOUND");
-	  	}
-  	
-	}
-		
+	  	}	
+	}	
 }
